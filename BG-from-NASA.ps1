@@ -1,22 +1,3 @@
-## Declare a function that takes source and destination arguments
-Function Get-Image () {
- 
-$url = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY"
-$proxy = [System.Net.WebRequest]::GetSystemWebProxy()
- 
-$proxy.Credentials = [System.Net.CredentialCache]::DefaultCredentials
- 
-$request = New-Object System.Net.WebCLient
- 
-$request.UseDefaultCredentials = $true ## Proxy credentials only
- 
-$request.Proxy.Credentials = $request.Credentials
- 
-Write-Host $request.DownloadString($url)
- 
-}
-
-
 function Test-RegistryValue {
 
 param (
