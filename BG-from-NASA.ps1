@@ -25,8 +25,8 @@ return $false
 
 function set-wallPaper ([string]$desktopImage)
 {
-Write-Host $desktopImage
- #    Remove-ItemProperty -path "HKCU:\Control Panel\Desktop" -name WallPaper 
+#Write-Host $desktopImage
+     Remove-ItemProperty -path "HKCU:\Control Panel\Desktop" -name WallPaper 
 
 #Not actually needed
 <#
@@ -84,5 +84,3 @@ $bmpFile.Dispose()
 $srcImg.Dispose()
 
 set-wallPaper($destPath)
-
-
