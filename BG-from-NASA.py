@@ -28,7 +28,6 @@ def doBGfromNASA():
     # draw text, half opacity
     d.text((10,10), title, font=fnt, fill=(255,255,255,255))
     out = Image.alpha_composite(img.convert('RGBA'), txt)
-    f.close()
     #out.show()    
     se = appscript.app('System Events')
     desktops = se.desktops.display_name.get()
