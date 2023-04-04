@@ -40,7 +40,7 @@ def doBGfromNASA():
     d = ImageDraw.Draw(txt)
 
     # draw text, half opacity
-    d.text((10,80), title, font=fnt, fill=(255,255,255,255))
+    d.text((10,80), title, font=fnt, fill=(255,255,255,128))
     img = Image.alpha_composite(img.convert('RGBA'), txt)
     img = img.convert("RGB")
     img.save(f2)
