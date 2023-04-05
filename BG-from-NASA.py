@@ -2,7 +2,6 @@ import urllib.request
 import json
 from PIL import Image, ImageDraw, ImageFont
 import tempfile
-from appscript import app, mactypes
 import appscript
 import subprocess
 
