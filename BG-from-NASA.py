@@ -13,7 +13,7 @@ def doBGfromNASA():
     imgUrl = contents['hdurl']
     title = contents['title']
     print('found ' + title + " at " + imgUrl)
-    f = tempfile.NamedTemporaryFile(delete=True, suffix='.jpg');
+    f = tempfile.NamedTemporaryFile(delete=True, suffix='.jpg')
     f.write(urllib.request.urlopen(imgUrl).read())
     f.flush()
     img = Image.open(f)
@@ -28,7 +28,7 @@ def doBGfromNASA():
     if (factor < 1):
       factor = 1.0 /factor
     img = img.resize((int(w / factor), int(h/factor)), Image.Resampling.LANCZOS)
-    f2 = tempfile.NamedTemporaryFile(delete=True, suffix='.jpg');
+    f2 = tempfile.NamedTemporaryFile(delete=True, suffix='.jpg')
     f2 = open("/tmp/test.jpg", mode="w")
     # make a blank image for the text, initialized to transparent text color
     txt = Image.new("RGBA", img.size, (255,255,255,0))
