@@ -1,8 +1,10 @@
 import urllib.request
 import json
 from PIL import Image, ImageDraw, ImageFont
+import platform
 import tempfile
-import appscript
+if platform.system().lower().startswith('dar'):
+    import appscript
 import subprocess
 
 def doBGfromNASA():
@@ -48,11 +50,12 @@ def doBGfromNASA():
     f2.close()
     se = appscript.app('System Events')
     print(f2.name)
-    desktops = se.desktops.display_name.get()
-    for d in desktops:
-        desk = se.desktops[appscript.its.display_name == d]
-        desk.picture.set(appscript.mactypes.File(f2.name))
-    subprocess.call(['/usr/bin/killall', 'Dock'])
+    if platform.system().lower().startswith('dar'):
+        desktops = se.desktops.display_name.get()
+        for d in desktops:
+            desk = se.desktops[appscript.its.display_name == d]
+            desk.picture.set(appscript.mactypes.File(f2.name))
+            subprocess.call(['/usr/bin/killall', 'Dock'])
     print("done")
 if __name__ == "__main__":
     doBGfromNASA()
