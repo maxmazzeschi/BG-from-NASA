@@ -6,7 +6,7 @@ import tempfile
 if platform.system().lower().startswith('dar'):
     import appscript
 if platform.system().lower().startswith('lin'):
-    from linuxdesktop import *
+    from linuxdesktop import linuxdesktop
 import subprocess
 
 def doBGfromNASA():
