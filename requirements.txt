@@ -1,2 +1,2 @@
 Pillow>=9.0
-appscript>1.0
+appscript>1.0  ; sys_platform=="darwin"
