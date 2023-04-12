@@ -4,6 +4,8 @@ import os
 import re
 import subprocess
 import sys
+from gi.repository import Gio
+import xdg_base_dirs
 
 class linuxdesktop:
     def __init__(self):
@@ -142,7 +144,7 @@ class linuxdesktop:
             confighome = os.environ['APPDATA'] 
         else:
             try:
-                from xdg import BaseDirectory   
+                from xdg_base_dirs import BaseDirectory   
                 confighome =  BaseDirectory.xdg_config_home
             except ImportError: # Most likely a Linux/Unix system anyway
                 confighome =  os.path.join(self.get_home_dir(),".config")

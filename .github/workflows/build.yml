@@ -11,6 +11,11 @@ jobs:
         python-version: ["3.9"]
 
     steps:
+      - name Insall Linux specific
+      run: |
+        if [ "$RUNNER_OS" == "Linux" ]; then
+              apt install apt install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-4.0
+      shell: bash
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
