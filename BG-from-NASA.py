@@ -5,6 +5,8 @@ import platform
 import tempfile
 if platform.system().lower().startswith('dar'):
     import appscript
+if platform.system().lower().startswith('lin'):
+    from linuxdesktop import *
 import subprocess
 
 def doBGfromNASA():
@@ -35,7 +37,10 @@ def doBGfromNASA():
     txt = Image.new("RGBA", img.size, (255,255,255,0))
 
     # get a font
-    fnt = ImageFont.truetype("Arial Unicode.ttf", 30)
+    fontname = "FreeSerif.ttf"
+    if platform.system().lower().startswith('dar'):
+        fontname = "Arial Unicode.ttf"
+    fnt = ImageFont.truetype(fontname, 30)
     #fnt = ImageFont.load_default()
     # get a drawing context
     d = ImageDraw.Draw(txt)
@@ -48,14 +53,17 @@ def doBGfromNASA():
     f2.flush()
     f.close()
     f2.close()
-    se = appscript.app('System Events')
     print(f2.name)
     if platform.system().lower().startswith('dar'):
+        se = appscript.app('System Events')
         desktops = se.desktops.display_name.get()
         for d in desktops:
             desk = se.desktops[appscript.its.display_name == d]
             desk.picture.set(appscript.mactypes.File(f2.name))
             subprocess.call(['/usr/bin/killall', 'Dock'])
+    if platform.system().lower().startswith('lin'):
+        lde = linuxdesktop()
+        lde.set_wallpaper(file_loc=f2.name, first_run=1)
     print("done")
 if __name__ == "__main__":
     doBGfromNASA()
