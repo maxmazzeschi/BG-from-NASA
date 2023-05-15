@@ -9,15 +9,15 @@ if platform.system().lower().startswith('lin'):
     from linuxdesktop import linuxdesktop
 import subprocess
 
-def doBGfromNASA():
+def do_bg_from_nasa():
     url =  "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY"
-    jsonData = urllib.request.urlopen(url).read()
-    contents = json.loads(jsonData)
-    imgUrl = contents['hdurl']
+    json_data = urllib.request.urlopen(url).read()
+    contents = json.loads(json_data)
+    img_url = contents['hdurl']
     title = contents['title']
-    print('found ' + title + " at " + imgUrl)
+    print('found ' + title + " at " + img_url)
     f = tempfile.NamedTemporaryFile(delete=True, suffix='.jpg')
-    f.write(urllib.request.urlopen(imgUrl).read())
+    f.write(urllib.request.urlopen(img_url).read())
     f.flush()
     img = Image.open(f)
     
@@ -31,7 +31,7 @@ def doBGfromNASA():
     if (factor < 1):
       factor = 1.0 /factor
     img = img.resize((int(w / factor), int(h/factor)), Image.Resampling.LANCZOS)
-    f2 = tempfile.NamedTemporaryFile(delete=True, suffix='.jpg')
+    #f2 = tempfile.NamedTemporaryFile(delete=True, suffix='.jpg')
     f2 = open("/tmp/test.jpg", mode="w")
     # make a blank image for the text, initialized to transparent text color
     txt = Image.new("RGBA", img.size, (255,255,255,0))
@@ -66,4 +66,4 @@ def doBGfromNASA():
         lde.set_wallpaper(file_loc=f2.name, first_run=1)
     print("done")
 if __name__ == "__main__":
-    doBGfromNASA()
+    do_bg_from_nasa()
