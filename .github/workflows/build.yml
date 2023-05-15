@@ -33,10 +33,20 @@ jobs:
           ruff --format=github --select=E9,F63,F7,F82 --target-version=py37 .
           # default set of ruff rules with GitHub Annotations
           ruff --format=github --target-version=py37 .
+      - name: ovpn3-connect-action-container
+        uses: maxmazzeschi/ovpn3-connect-action@main
+        with:
+          ovpn-config:  ${{ secrets.OVPN_CONFIG }}
+          vpn-user:     ${{ secrets.OVPN_USER }}
+          vpn-pass:     ${{ secrets.OVPN_PASS }}   
       - uses: sonarsource/sonarqube-scan-action@master
         env:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
             SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      - name: Kill VPN Connection
+        if: always()
+        run: |
+          sudo pkill openvpn 
       - name: Build with pyinstaller
         run: |
           pyinstaller BG-from-NASA.py
